@@ -43,3 +43,4 @@ venv/
 .env
 dist
 yarn-error.log
+Archive.zip

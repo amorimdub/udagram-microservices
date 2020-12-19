@@ -6,8 +6,8 @@
     "test": "jest",
     "prebuild": "rimraf dist",
     "dev": "tsnd --ignore node_modules --transpile-only --no-notify --respawn src/server.ts",
-    "build": "yarn exec tsc && cp .npmrc ./dist/.npmrc && cp package.json ./dist/package.json && cd ./dist && zip -r Archive.zip . && cd ..",
-    "start": "node"
+    "build": "yarn exec tsc && cp .npmrc ./dist/.npmrc && cp package.json ./dist/package.json && cp yarn.lock ./dist/yarn.lock",
+    "start": "node server.js"
   },
   "author": "Felipe Silva <amorimdub@gmail.com>",
   "license": "MIT",
