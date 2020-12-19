@@ -1,0 +1,40 @@
+{
+  "name": "@udagram/feed-api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "prebuild": "rimraf dist",
+    "dev": "tsnd --ignore node_modules --transpile-only --no-notify --respawn src/server.ts",
+    "build": "yarn exec tsc && cp .npmrc ./dist/.npmrc && cp package.json ./dist/package.json && cp yarn.lock ./dist/yarn.lock",
+    "start": "node server.js"
+  },
+  "author": "Felipe Silva <amorimdub@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/jsonwebtoken": "^8.3.2",
+    "aws-sdk": "^2.492.0",
+    "dotenv": "^8.2.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.17.1",
+    "pg": "^8.3.3",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^5.22.3",
+    "sequelize-typescript": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.32",
+    "@types/express": "^4.17.0",
+    "@types/node": "^11.15.27",
+    "@types/sequelize": "^4.28.3",
+    "@types/validator": "^10.11.3",
+    "rimraf": "^3.0.2",
+    "ts-node-dev": "^1.0.0-pre.63",
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/jest": "^26.0.14",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  }
+}
