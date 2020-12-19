@@ -1,11 +1,11 @@
-name: "Feed API"
+name: "User API"
 
 on:
   push:
     branches:
       - main
     paths:
-      - "src/feed-api"
+      - "src/user-api"
 
 jobs:
   main:
@@ -26,9 +26,9 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./src/feed-api
-          file: ./src/feed-api/Dockerfile
+          context: ./src/user-api
+          file: ./src/user-api/Dockerfile
           push: true
-          tags: amorimdub/udagram-feed-api:latest
+          tags: amorimdub/udagram-user-api:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
