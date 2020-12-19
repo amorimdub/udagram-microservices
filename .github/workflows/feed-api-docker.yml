@@ -1,8 +1,8 @@
-name: "feed-api"
+name: "Feed API"
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   main:
