@@ -21,8 +21,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: src/feed-api
-          file: ./Dockerfile
+          context: ./src/feed-api
+          file: ./src/feed-api/Dockerfile
           push: true
           tags: amorimdub/udagram-feed-api:latest
       - name: Image digest
