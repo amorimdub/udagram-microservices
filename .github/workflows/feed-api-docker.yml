@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "src/feed-api"
+      - ".github/workflows/feed-api-docker.yml"
 
 jobs:
   main:

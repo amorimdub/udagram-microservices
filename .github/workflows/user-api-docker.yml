@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "src/user-api"
+      - ".github/workflows/user-api-docker.yml"
 
 jobs:
   main:
