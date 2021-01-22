@@ -1,11 +1,11 @@
-name: "Web"
+name: "Proxy"
 
 on:
   push:
     branches:
       - main
     paths:
-      - "src/web"
+      - "src/proxy"
       - ".github/workflows/proxy-docker.yml"
 
 jobs:
