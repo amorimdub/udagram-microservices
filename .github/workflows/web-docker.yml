@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "src/web"
+      - "src/web/**"
       - ".github/workflows/web-docker.yml"
 
 jobs:
