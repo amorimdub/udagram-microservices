@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "src/user-api"
+      - "src/user-api/**"
       - ".github/workflows/user-api-docker.yml"
 
 jobs:
