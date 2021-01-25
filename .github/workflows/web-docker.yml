@@ -1,4 +1,4 @@
-name: "Web"
+name: "Web Angular"
 
 on:
   push:
