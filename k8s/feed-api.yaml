@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feed-api-deploy
+  namespace: udagram
+spec:
+  selector:
+    matchLabels:
+      app: feed-api
+  template:
+    metadata:
+      labels:
+        app: feed-api
+    spec:
+      containers:
+        - name: feed-api
+          image: amorimdub/udagram-feed-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRES_USERNAME
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: W022$erver
+            - name: POSTGRES_DATABASE
+              value: udagram_feed_dev
+            - name: POSTGRES_HOST
+              value: udagram-db.cufkp0m9dwsf.eu-west-1.rds.amazonaws.com
+            - name: AWS_REGION
+              value: eu-west-1
+            - name: AWS_PROFILE
+              value: DEPLOYED
+            - name: AWS_MEDIA_BUCKET
+              value: fsilva-udagram-dev
+            - name: PORT
+              value: "8080"
+            - name: AWS_ACCESS_KEY_ID
+              value: AKIATIIAK72R3P6IEVHG
+            - name: AWS_SECRET_ACCESS_KEY
+              value: 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
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: feed-api-svc
+  namespace: udagram
+spec:
+  selector:
+    app: feed-api
+  ports:
+    - port: 8080
+  type: ClusterIP
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: feed-api-hpa
+  namespace: udagram
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: feed-api-deploy
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50

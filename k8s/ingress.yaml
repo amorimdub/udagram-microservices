@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: udagram
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: app.127.0.0.1.nip.io # update IP address here
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: web-svc
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ingress
+  namespace: udagram
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - host: app.127.0.0.1.nip.io # update IP address here
+      http:
+        paths:
+          - path: /api/v0/user(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: user-api-svc
+                port:
+                  number: 8080
+          - path: /api/v0/feed(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: feed-api-svc
+                port:
+                  number: 8080

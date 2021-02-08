@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api-deploy
+  namespace: udagram
+spec:
+  selector:
+    matchLabels:
+      app: user-api
+  template:
+    metadata:
+      labels:
+        app: user-api
+    spec:
+      containers:
+        - name: user-api
+          image: amorimdub/udagram-user-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POSTGRES_USERNAME
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: W022$erver
+            - name: POSTGRES_DATABASE
+              value: udagram_user_dev
+            - name: POSTGRES_HOST
+              value: udagram-db.cufkp0m9dwsf.eu-west-1.rds.amazonaws.com
+            - name: JWT_SECRET
+              value: "12345678"
+            - name: PORT
+              value: "8080"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: user-api-svc
+  namespace: udagram
+spec:
+  selector:
+    app: user-api
+  ports:
+    - port: 8080
+  type: ClusterIP
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: user-api-hpa
+  namespace: udagram
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: user-api-deploy
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
